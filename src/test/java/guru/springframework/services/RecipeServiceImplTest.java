@@ -13,9 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 //@RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceImplTest {
@@ -41,5 +39,20 @@ public class RecipeServiceImplTest {
         assertEquals(1, recipes.size());
         //verify that the findAll() method of recipeRepository was called once.
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getRecipesTest() throws Exception{
+        Recipe recipe = new Recipe();
+        Set<Recipe> recipeData = new HashSet<>();
+        recipeData.add(recipe);
+
+        when(recipeService.getRecipes()).thenReturn(recipeData);
+
+        Set<Recipe> recipes = recipeService.getRecipes();
+
+        assertEquals(1, recipes.size());
+        verify(recipeRepository, times(1)).findAll();
+        verify(recipeRepository, never()).findById(anyLong());
     }
 }
