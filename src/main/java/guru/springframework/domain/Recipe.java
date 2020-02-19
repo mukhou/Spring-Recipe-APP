@@ -43,7 +43,7 @@ public class Recipe {
     private Notes notes;
 
     @ManyToMany
-    @JoinTable(name = "recipe_category", // this means the kjoin table nae is RECIPE_CATEGORY
+    @JoinTable(name = "recipe_category", // this means the join table name is RECIPE_CATEGORY
             joinColumns = @JoinColumn(name = "recipe_id"), //from this side of the table we have the column recipe_id
             inverseJoinColumns = @JoinColumn(name = "category_id")) // from the other side we are having the column category_id
     private Set<Category> categories = new HashSet<>();
